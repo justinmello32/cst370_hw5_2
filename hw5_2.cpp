@@ -16,7 +16,7 @@
 using namespace std;
 using namespace std::chrono;
 
-int input; // size of array
+int userInput;
 
 void swap(int* a, int* b) {
 
@@ -32,18 +32,16 @@ void heapify( int arr[], int i) {
     int r = 2 * i + 2;
 
 
-    if (l < input && arr[l] < arr[smallest])
+    if (l < userInput && arr[l] < arr[smallest])
         smallest = l;
 
 
-    if (r < input && arr[r] < arr[smallest])
+    if (r < userInput && arr[r] < arr[smallest])
         smallest = r;
 
 
     if (smallest != i) {
         swap(arr[i], arr[smallest]);
-
-
         heapify(arr, smallest);
     }
 }
@@ -51,7 +49,7 @@ void heapify( int arr[], int i) {
 
 void buildHeap(int arr[]) {
 
-    for (int i = input; i >= 0; i--) {
+    for (int i = userInput; i >= 0; i--) {
         heapify(arr, i);
     }
 }
@@ -135,7 +133,7 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
-auto heapTime(int arr[]) {
+auto calcHeapTime(int arr[]) {
 
     //Start
     auto started = high_resolution_clock::now();
@@ -150,13 +148,13 @@ auto heapTime(int arr[]) {
     return time_total.count();
 }
 
-auto mergeTime(int arr[]) {
+auto calcMergeTime(int arr[]) {
 
     //Start
     auto started = high_resolution_clock::now();
 
     //Sort
-    mergeSort(arr, 0, input - 1);
+    mergeSort(arr, 0, userInput - 1);
 
     //Stop and return time
     auto done = high_resolution_clock::now();
@@ -165,13 +163,13 @@ auto mergeTime(int arr[]) {
     return time_total.count();
 }
 
-auto quickTime(int arr[]) {
+auto calcQuickTime(int arr[]) {
 
     //Start
     auto started = high_resolution_clock::now();
 
     //Sort
-    quickSort(arr, 0, input - 1);
+    quickSort(arr, 0, userInput - 1);
 
     //Stop and return time
     auto done = high_resolution_clock::now();
@@ -187,19 +185,19 @@ int main() {
     auto roll = std::bind(distribution, randomNum);
 
     cout << "Enter input size: ";
-    cin >> input;
+    cin >> userInput;
 
-    int* array = new int[input];
-    generate(array, array + input, roll);
+    int* array = new int[userInput];
+    generate(array, array + userInput, roll);
 
     cout << "===================== Execution Time ====================" << endl;
-    cout << "Heap sort:    " << heapTime(array)  << "  milliseconds" << endl;
-    generate(array, array + input, roll);
+    cout << "Heap sort:    " << calcHeapTime(array)  << "  milliseconds" << endl;
+    generate(array, array + userInput, roll);
 
-    cout << "Merge sort:   " << mergeTime(array) << "  milliseconds" << endl;
-    generate(array, array + input, roll);
+    cout << "Merge sort:   " << calcMergeTime(array) << "  milliseconds" << endl;
+    generate(array, array + userInput, roll);
 
-    cout << "Quick sort:   " << quickTime(array) << "  milliseconds" << endl;
+    cout << "Quick sort:   " << calcQuickTime(array) << "  milliseconds" << endl;
     cout << "=========================================================" << endl;
 
     //Delete array after calculations complete
