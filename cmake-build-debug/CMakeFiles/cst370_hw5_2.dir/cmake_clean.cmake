@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/cst370_hw5_2.dir/main.cpp.o"
+  "CMakeFiles/cst370_hw5_2.dir/hw5_2.cpp.o"
   "cst370_hw5_2"
   "cst370_hw5_2.pdb"
 )

@@ -1,17 +1,21 @@
-
+/*
+ * Title: hw5_2.cpp
+ * Abstract: This program displays the performance of three
+ *           different sorting algorithms (= heap sort, merge sort, and quick sort)
+ *           on the screen.
+ * Author: Justin Mello
+ * ID: 2002
+ * Date: 04/13/2021
+*/
 
 #include <iostream>
 #include <algorithm>
-#include <string>
 #include <chrono>
-#include <cstdint>
 #include <random>
 #include <functional>
 using namespace std;
 using namespace std::chrono;
 
-
-//borrowed code
 int input; // size of array
 
 void swap(int* a, int* b) {
@@ -129,31 +133,33 @@ void quickSort(int arr[], int low, int high) {
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
-} //end borrowed code
+}
 
-//my code
 auto heapTime(int arr[]) {
 
+    //Start
     auto started = high_resolution_clock::now();
 
+    //Sort
     buildHeap(arr);
 
+    //Stop and return time
     auto done = high_resolution_clock::now();
-
     duration<double> time_total = duration_cast<duration<double>>(done-started);
 
     return time_total.count();
-
 }
 
 auto mergeTime(int arr[]) {
 
+    //Start
     auto started = high_resolution_clock::now();
 
+    //Sort
     mergeSort(arr, 0, input - 1);
 
+    //Stop and return time
     auto done = high_resolution_clock::now();
-
     duration<double> time_total = duration_cast<duration<double>>(done-started);
 
     return time_total.count();
@@ -161,12 +167,14 @@ auto mergeTime(int arr[]) {
 
 auto quickTime(int arr[]) {
 
+    //Start
     auto started = high_resolution_clock::now();
 
+    //Sort
     quickSort(arr, 0, input - 1);
 
+    //Stop and return time
     auto done = high_resolution_clock::now();
-
     duration<double> time_total = duration_cast<duration<double>>(done-started);
 
     return time_total.count();
@@ -174,28 +182,26 @@ auto quickTime(int arr[]) {
 
 int main() {
 
-    //These three lines make a function called roll() that generates random numbers from 0 to 10M
-    default_random_engine generator;
+    default_random_engine randomNum;
     uniform_int_distribution<int> distribution(1,10'000'000);
-    auto roll = std::bind ( distribution, generator ); //Makes a function named roll that returns 1 to 10M
+    auto roll = std::bind(distribution, randomNum);
 
+    cout << "Enter input size: ";
     cin >> input;
 
-    int* arr = new int[input];
-    generate(arr, arr + input, roll);
-
-
-    cout << "Enter input size: "<< input << endl;
+    int* array = new int[input];
+    generate(array, array + input, roll);
 
     cout << "===================== Execution Time ====================" << endl;
-    cout << "Heap sort:    " << heapTime(arr)  << "  milliseconds" << endl;
-    generate(arr, arr + input, roll);
+    cout << "Heap sort:    " << heapTime(array)  << "  milliseconds" << endl;
+    generate(array, array + input, roll);
 
-    cout << "Merge sort:   " << mergeTime(arr) << "  milliseconds" << endl;
-    generate(arr, arr + input, roll);
+    cout << "Merge sort:   " << mergeTime(array) << "  milliseconds" << endl;
+    generate(array, array + input, roll);
 
-    cout << "Quick sort:   " << quickTime(arr) << "  milliseconds" << endl;
+    cout << "Quick sort:   " << quickTime(array) << "  milliseconds" << endl;
     cout << "=========================================================" << endl;
 
-    delete []arr;
+    //Delete array after calculations complete
+    delete []array;
 }
