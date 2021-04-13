@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/justinmello/Documents/school/cst370/cst370_hw5_2/main.cpp
+iostream
+-
+algorithm
+-
+string
+-
+chrono
+-
+cstdint
+-
+random
+-
+functional
+-
+
