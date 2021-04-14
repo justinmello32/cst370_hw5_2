@@ -6,6 +6,9 @@
  * Author: Justin Mello
  * ID: 2002
  * Date: 04/13/2021
+ * Citations: Heap sort functions used from https://www.geeksforgeeks.org/heap-sort/.
+ *            Merge sort functions used from https://www.geeksforgeeks.org/merge-sort/.
+ *            Quick sort functions used from https://www.geeksforgeeks.org/quick-sort/.
 */
 
 #include <iostream>
@@ -18,6 +21,7 @@ using namespace std::chrono;
 
 int userInput;
 
+//Used from https://www.geeksforgeeks.org/heap-sort/
 void swap(int* a, int* b) {
 
     int t = *a;
@@ -25,6 +29,7 @@ void swap(int* a, int* b) {
     *b = t;
 }
 
+//Used from https://www.geeksforgeeks.org/heap-sort/
 void heapify( int arr[], int i) {
 
     int smallest = i;
@@ -46,7 +51,7 @@ void heapify( int arr[], int i) {
     }
 }
 
-
+//https://www.geeksforgeeks.org/heap-sort/
 void buildHeap(int arr[]) {
 
     for (int i = userInput; i >= 0; i--) {
@@ -54,6 +59,7 @@ void buildHeap(int arr[]) {
     }
 }
 
+//Used from https://www.geeksforgeeks.org/merge-sort/
 void merge(int arr[], int l, int m, int r) {
 
     int n1 = m - l + 1;
@@ -98,6 +104,7 @@ void merge(int arr[], int l, int m, int r) {
     }
 }
 
+//Used from https://www.geeksforgeeks.org/merge-sort/.
 void mergeSort(int arr[], int l, int r) {
 
     if(l >= r) {
@@ -109,6 +116,7 @@ void mergeSort(int arr[], int l, int r) {
     merge(arr, l, m, r);
 }
 
+//Used from https://www.geeksforgeeks.org/quick-sort/
 int partition (int arr[], int low, int high) {
     int pivot = arr[high];
     int i = (low - 1);
@@ -124,7 +132,7 @@ int partition (int arr[], int low, int high) {
     return (i + 1);
 }
 
-
+//Used from https://www.geeksforgeeks.org/quick-sort/
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
         int pi = partition(arr, low, high);
